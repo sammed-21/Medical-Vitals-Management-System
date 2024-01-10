@@ -5,8 +5,7 @@ class VitalService {
     }
 
     insert_vital(vital, centralizedDB) {
-//   Assuming 'vital' is an object containing vital information like username, vitalID, value, and timestamp
-
+ 
 if (!centralizedDB.users[vital.username]) {
     return { status: "error", message: "User does not exist" };
 }
@@ -27,16 +26,7 @@ userVitals[vital.vital_id].push({
         
 
 return { status: "success", message: `Vital ${vital.vital_id} for ${vital.username} inserted successfully.` };
-
-        // if(!centralizedDB.users[vital.username]){
-        //     return {status:"error",message:"user does not exist"}
-        // }
-        
-
-        // centralizedDB.vitals[vital.username] = vital
-        
-        // return { status: "success", message: `Vital ${vital.vital_id} for ${vital.username} inserted successfully. ` };
-                
+ 
         
  
     }
@@ -77,26 +67,7 @@ return { status: "success", message: `Vital ${vital.vital_id} for ${vital.userna
     
     }
 
-    // delete vitals 
-//     delete_vitals(vitals, centralizedDB) {
-//         console.log(vitals)
-//         const { username, vitalID, timestamp } = vitals
-//            if (!centralizedDB.users[username]) {
-//             return { status: "error", message: "User does not exist" };
-//         }
-//  const userVitals = centralizedDB.vitals[username] || {};
-//         const vitalsToDelete = userVitals[vitalID] || [];
-//           const deleteTimestamp = new Date(timestamp).getTime();
-
-//     // Filter out the records to keep only those outside the specified timestamp
-//     const remainingVitals = vitalsToDelete.filter((record) => {
-//         const recordTimestamp = new Date(record.timestamp).getTime();
-//         return recordTimestamp !== deleteTimestamp;
-//     });
-
-// console.log("😅😅",remainingVitals)
-        
-    //     }
+     
     delete_vitals(vitals, centralizedDB) {
     const { username, vitalID, timestamp } = vitals;
 
