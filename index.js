@@ -31,6 +31,11 @@ var commandObjects =[  {
             "age": 35,
             "gender": "Male"
     },
+    {
+            "command": "get_user",
+            "username": "Bob",
+            
+        },
         {
             "command": "insert_vital",
             "username": "Alice",
@@ -108,6 +113,11 @@ for (let commandObject of commandObjects) {
         case "create_user":
             res = userController.handleCreateUser(object,centralizedDB);
             console.log("user",res);
+        
+            break;
+        case "get_user":
+            res = userController.handleGetUserInfo(object,centralizedDB);
+            console.log("get user",res);
         
             break;
         case "insert_vital":

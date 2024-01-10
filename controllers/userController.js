@@ -1,21 +1,22 @@
-import userService from '../services/userServices.js'
-
+ 
 class UserController {
    
     constructor(userService) {
-      this.userSerivce = userService
+      this.userService = userService
   }
 
     handleCreateUser(user,userDB)
     {
         
-        const result = this.userSerivce.createUser(user,userDB);
+        const result = this.userService.createUser(user,userDB);
        
        return result
     }
 
-    handleGetUserInfo(username) {
-        return userService.getUserInfo(username);
+    handleGetUserInfo(username, userDB) {
+        console.log("✅",userDB)
+        const result = this.userService.getUserInfo(username, userDB);
+        return result
     }
 }
 

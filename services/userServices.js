@@ -7,20 +7,31 @@ class UserService {
     }
 
     createUser(user, centralDB) {
+
       
        
         if (!centralDB.users[user.username]) {
+            const { username, gender, age } = user;
    
-           centralDB.users[user.username]= user
+            centralDB.users[user.username] = {
+                username,gender,age
+            }
+               
             return {"status":"success","message":`User ${user.username} created successfully`}
         } else {
             return {"status":"error","message":"Username already exists. Choose a different one"}
         }
     }
 
-    getUserInfo(username) {
-        const user = this.users[username]
-        return user ? user : 'User not found'
+    getUserInfo(user, centralDB) {
+        if (!centralDB.users[user.username]) {
+            return { status: "error", message: "user not found" }
+            
+        }
+        let result = centralDB.users[user.username]
+       
+       
+        return result;
     }
 }
 
