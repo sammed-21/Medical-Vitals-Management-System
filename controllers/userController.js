@@ -14,7 +14,7 @@ class UserController {
     }
 
     handleGetUserInfo(username, userDB) {
-        console.log("✅",userDB)
+        // console.log("✅",userDB)
         const result = this.userService.getUserInfo(username, userDB);
         return result
     }

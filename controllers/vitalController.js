@@ -35,6 +35,11 @@ class VitalController {
         const result = this.vitalService.aggregates(vital, centralizedDB);
         return result;
    }
+    populateInsight(vital, centralizedDB) {
+      
+        const result = this.vitalService.population_insight(vital, centralizedDB);
+        return result;
+   }
 }
 
 export default VitalController;
