@@ -128,6 +128,38 @@ return { status: "success", message: `Vital ${vital.vital_id} for ${vital.userna
 
     return { status: "success", message: `Vital deleted for ${username}.` };
 }
+edit_vital(vitals, centralizedDB) {
+    const { username, vitalID, timestamp, newValue } = vitals;
+
+    if (!centralizedDB.users[username]) {
+        return { status: "error", message: "User does not exist" };
+    }
+
+    const userVitals = centralizedDB.vitals[username] || {};
+    const vitalRecords = userVitals[vitalID] || [];
+
+    // Convert timestamp to Date object
+    const editTimestamp = new Date(timestamp).getTime();
+
+    // Find the index of the vital record to edit
+    const recordIndex = vitalRecords.findIndex((record) => {
+        const recordTimestamp = new Date(record.timestamp).getTime();
+        return recordTimestamp === editTimestamp;
+    });
+
+    // If the record is found, update its value
+    if (recordIndex !== -1) {
+        vitalRecords[recordIndex].value = newValue;
+
+        // Update the user's vitals in centralizedDB
+        userVitals[vitalID] = vitalRecords;
+        centralizedDB.vitals[username] = userVitals;
+
+        return { status: "success", message: `Vital edited for ${username}.` };
+    } else {
+        return { status: "error", message: "Vital record not found for the specified timestamp." };
+    }
+}
 
    
 }

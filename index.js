@@ -70,8 +70,20 @@ var commandObjects =[  {
 {
   "command": "get_vitals",
   "username": "Alice",
-  "period": ["2023-10-02", "2023-10-04"]
+  "period": ["2023-10-02", "2023-10-05"]
     },
+    {
+        "command": "edit_vitals",
+        "username": "Alice",
+        "vitalID": "Temperature",
+        "timestamp": "2023-10-04T12:30:00Z",
+        "newValue": 100
+    },
+    {
+      "command": "get_vitals",
+      "username": "Alice",
+      "period": ["2023-10-02", "2023-10-05"]
+        },
     {
   "command": "delete_vitals",
   "username": "Alice",
@@ -105,6 +117,10 @@ for (let commandObject of commandObjects) {
         case "get_vitals":
             res = vitalController.getVital(commandObject, centralizedDB);
             console.log("get all user ", res)
+            break;
+        case "edit_vitals":
+            res = vitalController.editVital(commandObject, centralizedDB);
+            console.log("edit ", res)
             break;
         case "delete_vitals":
             res = vitalController.deleteVital(commandObject, centralizedDB);

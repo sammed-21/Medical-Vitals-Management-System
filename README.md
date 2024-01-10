@@ -1,0 +1,1 @@
+this is the medical and vital management system using javascript and oops principle

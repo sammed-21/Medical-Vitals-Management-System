@@ -25,6 +25,11 @@ class VitalController {
         const result = this.vitalService.delete_vitals(vital, centralizedDB);
         return result;
    }
+    editVital(vital, centralizedDB) {
+      
+        const result = this.vitalService.edit_vital(vital, centralizedDB);
+        return result;
+   }
 }
 
 export default VitalController;
