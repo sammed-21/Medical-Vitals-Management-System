@@ -30,6 +30,11 @@ class VitalController {
         const result = this.vitalService.edit_vital(vital, centralizedDB);
         return result;
    }
+    aggregateVital(vital, centralizedDB) {
+      
+        const result = this.vitalService.aggregates(vital, centralizedDB);
+        return result;
+   }
 }
 
 export default VitalController;

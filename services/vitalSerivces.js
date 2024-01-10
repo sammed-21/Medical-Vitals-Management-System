@@ -160,6 +160,58 @@ edit_vital(vitals, centralizedDB) {
         return { status: "error", message: "Vital record not found for the specified timestamp." };
     }
 }
+ 
+    aggregates(vitals, centralizedDB) {
+        const { username, vital_ids, start_timestamp,
+            end_timestamp } = vitals
+        
+          if (!centralizedDB.users[username]) {
+        return { status: "error", message: "User does not exist." };
+    }
+
+    // Step 2: Check Vital Records Existence
+    if (!centralizedDB.vitals[username]) {
+        return { status: "error", message: "No vital records found for the user." };
+    }
+        const aggregates = {};
+        vital_ids.forEach((vitalID) => {
+            console.log(vitalID)
+            const vitalRecords = centralizedDB.vitals[username]?.[vitalID] || [];
+            console.log("record",vitalRecords)
+           const filteredVitals = vitalRecords.filter((vital) => {
+            const vitalTimestamp = new Date(vital.timestamp).getTime();
+            return (
+                vitalTimestamp >= new Date(start_timestamp).getTime() &&
+                vitalTimestamp <= new Date(end_timestamp).getTime()
+            );
+        });
+            // console.log("✅", vitalID, filteredVitals)
+              const totalDays = (new Date(end_timestamp) - new Date(start_timestamp)) / (1000 * 60 * 60 * 24);
+            const vitalValues = filteredVitals.map((vital) => vital.value);
+            if (vitalValues.length > 0) {
+            const sumValues = vitalValues.reduce((sum, value) => sum + value, 0);
+            const averageValue = sumValues / totalDays;
+            aggregates[vitalID] = averageValue;
+            // console.log("🫡",averageValue)
+        }
+    
+})
+    
+    
+    
+    return {
+        "status": "success",
+        "message": "Aggregate fetched successfully.",
+        "data": {
+            "username": username,
+            "aggregates": aggregates,
+            "start_timestamp": start_timestamp,
+            "end_timestamp": end_timestamp,
+        },
+    };
+    }
+    
+
 
    
 }
