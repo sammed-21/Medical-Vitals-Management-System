@@ -1,7 +1,7 @@
  
 class VitalService {
     constructor() {
-        this.vitals = {};
+      
     }
 
     insert_vital(vital, centralizedDB) {
@@ -130,55 +130,7 @@ edit_vital(vitals, centralizedDB) {
     }
 }
  
-//     aggregates(vitals, centralizedDB) {
-//         const { username, vital_ids, start_timestamp,
-//             end_timestamp } = vitals
-        
-//           if (!centralizedDB.users[username]) {
-//         return { status: "error", message: "User does not exist." };
-//     }
-
-//     // Step 2: Check Vital Records Existence
-//     if (!centralizedDB.vitals[username]) {
-//         return { status: "error", message: "No vital records found for the user." };
-//     }
-//         const aggregates = {};
-//         vital_ids.forEach((vitalID) => {
-//             // console.log(vitalID)
-//             const vitalRecords = centralizedDB.vitals[username]?.[vitalID] || [];
-//             // console.log("record",vitalRecords)
-//            const filteredVitals = vitalRecords.filter((vital) => {
-//             const vitalTimestamp = new Date(vital.timestamp).getTime();
-//             return (
-//                 vitalTimestamp >= new Date(start_timestamp).getTime() &&
-//                 vitalTimestamp <= new Date(end_timestamp).getTime()
-//             );
-//         });
-//             // console.log("✅", vitalID, filteredVitals)
-//               const totalDays = (new Date(end_timestamp) - new Date(start_timestamp)) / (1000 * 60 * 60 * 24);
-//             const vitalValues = filteredVitals.map((vital) => vital.value);
-//             if (vitalValues.length > 0) {
-//             const sumValues = vitalValues.reduce((sum, value) => sum + value, 0);
-//             const averageValue = sumValues / totalDays;
-//             aggregates[vitalID] = averageValue;
-//             // console.log("🫡",averageValue)
-//         }
-    
-// })
-    
-    
-    
-//     return {
-//         "status": "success",
-//         "message": "Aggregate fetched successfully.",
-//         "data": {
-//             "username": username,
-//             "aggregates": aggregates,
-//             "start_timestamp": start_timestamp,
-//             "end_timestamp": end_timestamp,
-//         },
-//     };
-    //     }
+ 
     aggregates(vitals, centralizedDB) {
     const { username, vital_ids, start_timestamp, end_timestamp } = vitals;
 
@@ -186,7 +138,7 @@ edit_vital(vitals, centralizedDB) {
         return { status: "error", message: "User does not exist." };
     }
 
-    // Step 2: Check Vital Records Existence
+    //   Check Vital Records Existence
     if (!centralizedDB.vitals[username]) {
         return { status: "error", message: "No vital records found for the user." };
     }
@@ -230,17 +182,17 @@ edit_vital(vitals, centralizedDB) {
 population_insight(vital, centralizedDB) {
     const { username, vital_id, start_timestamp, end_timestamp } = vital;
 
-    // Step 1: Check if the user exists
+    //   Check if the user exists
     if (!centralizedDB.users[username]) {
         return { status: "error", message: "User does not exist." };
     }
 
-    // Step 2: Check if vital records exist for the user and vital_id
+    //   Check if vital records exist for the user and vital_id
     if (!centralizedDB.vitals[username] || !centralizedDB.vitals[username][vital_id]) {
         return { status: "error", message: "No vital records found for the user and vital_id." };
     }
 
-    // Step 3: Filter vital records within the specified time range
+    // Filter vital records within the specified time range
     const vitalRecords = centralizedDB.vitals[username][vital_id].filter((vital) => {
         const vitalTimestamp = new Date(vital.timestamp).getTime();
         return (
@@ -250,14 +202,14 @@ population_insight(vital, centralizedDB) {
     });
     console.log("vital ",vitalRecords)
 
-    // Step 4: Calculate Percentile Rank
+//   Calculate Percentile Rank
     if (vitalRecords.length > 0) {
         const userVitalValue = vitalRecords[0].value;
         const sortedValues = vitalRecords.map((vital) => vital.value).sort((a, b) => a - b);
         const rank = sortedValues.indexOf(userVitalValue) + 1;
         const percentile = (rank / vitalRecords.length) * 100;
 
-        // Step 5: Return Result
+        //  Return Result
         return {
             status: "success",
             message: "Population insight fetched successfully.",

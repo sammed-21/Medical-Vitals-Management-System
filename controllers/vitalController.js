@@ -10,35 +10,34 @@ class VitalController {
     handleInsertVital(vital,centralizedDB)
     {
         
-        const result = this.vitalService.insert_vital(vital,centralizedDB);
+        return  this.vitalService.insert_vital(vital,centralizedDB);
        
-       return result
+       
     }
 
-    getVital(vital, centralizedDB) {
+    handleGetVital(vital, centralizedDB) {
       
-        const result = this.vitalService.get_vital(vital, centralizedDB);
-        return result;
+        return this.vitalService.get_vital(vital, centralizedDB);
+         
    }
-    deleteVital(vital, centralizedDB) {
+    handleDeleteVital(vital, centralizedDB) {
       
-        const result = this.vitalService.delete_vitals(vital, centralizedDB);
-        return result;
+        return this.vitalService.delete_vitals(vital, centralizedDB);
+        
    }
-    editVital(vital, centralizedDB) {
+    handleEditVital(vital, centralizedDB) {
       
-        const result = this.vitalService.edit_vital(vital, centralizedDB);
-        return result;
+    return this.vitalService.edit_vital(vital, centralizedDB);
+        
    }
-    aggregateVital(vital, centralizedDB) {
+    handleAggregateVital(vital, centralizedDB) {
       
-        const result = this.vitalService.aggregates(vital, centralizedDB);
-        return result;
-   }
-    populateInsight(vital, centralizedDB) {
+         return this.vitalService.aggregates(vital, centralizedDB);
+           }
+    handlePopulateInsight(vital, centralizedDB) {
       
-        const result = this.vitalService.population_insight(vital, centralizedDB);
-        return result;
+        return this.vitalService.population_insight(vital, centralizedDB);
+        
    }
 }
 

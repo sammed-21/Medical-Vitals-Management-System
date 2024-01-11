@@ -1,14 +1,9 @@
 
 
 class UserService {
-    constructor() {
-        
-    }
+    constructor() {}
 
-    createUser(user, centralDB) {
-
-      
-       
+    createUser(user, centralDB) {  
         if (!centralDB.users[user.username]) {
             const { username, gender, age } = user;
    

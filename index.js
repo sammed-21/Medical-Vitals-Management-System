@@ -45,23 +45,23 @@ for (let commandObject of jsonData) {
             console.log(res)
             break;
         case "get_vitals":
-            res = vitalController.getVital(commandObject, centralizedDB);
+            res = vitalController.handleGetVital(commandObject, centralizedDB);
             console.log( res)
             break;
         case "edit_vitals":
-            res = vitalController.editVital(commandObject, centralizedDB);
+            res = vitalController.handleEditVital(commandObject, centralizedDB);
             console.log( res)
             break;
         case "aggregate":
-            res = vitalController.aggregateVital(commandObject, centralizedDB);
+            res = vitalController.handleAggregateVital(commandObject, centralizedDB);
             console.log(res)
             break;
         case "population_insight":
-            res = vitalController.populateInsight(commandObject, centralizedDB);
+            res = vitalController.handlePopulateInsight(commandObject, centralizedDB);
             console.log(res)
             break;
         case "delete_vitals":
-            res = vitalController.deleteVital(commandObject, centralizedDB);
+            res = vitalController.handleDeleteVital(commandObject, centralizedDB);
             console.log( res)
             break;
         default:

@@ -8,15 +8,15 @@ class UserController {
     handleCreateUser(user,userDB)
     {
         
-        const result = this.userService.createUser(user,userDB);
+       return  this.userService.createUser(user,userDB);
        
-       return result
+    
     }
 
     handleGetUserInfo(username, userDB) {
-        // console.log("✅",userDB)
-        const result = this.userService.getUserInfo(username, userDB);
-        return result
+      
+       return  this.userService.getUserInfo(username, userDB);
+    
     }
 }
 
